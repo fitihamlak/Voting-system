@@ -26,25 +26,98 @@ By leveraging Celo for our decentralized voting application, we tap into a block
 **Step 1: Setting Up the Project:**
 
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
-<script src="https://gist.github.com/Gillmasija/f776e6d0d8fe980945e0232347e44472.js"></script>
+'''//bash
+mkdir decentralized-voting
+cd decentralized-voting
+npm init -y
+npm install celo-sdk
+'''
 
 **Step 2: Smart Contract Development:**
 
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
-<script src="https://gist.github.com/Gillmasija/542ebe82acee8d28e1a60d6a066be85a.js"></script>
+'''//javascript
+// Voting.sol
+pragma solidity ^0.8.0;
+
+contract Voting {
+    address public admin;
+    mapping(uint256 => uint256) public votes;
+
+    // Modifier to restrict access to the admin
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Only admin can call this function");
+        _;
+    }
+
+    // Constructor to set the admin when the contract is deployed
+    constructor() {
+        admin = msg.sender;
+    }
+
+    // Function to start a new election, only callable by the admin
+    function startElection(uint256 electionId) external onlyAdmin {
+        require(votes[electionId] == 0, "Election ID already exists");
+        votes[electionId] = 1; // Initialize with one vote to avoid division by zero later
+    }
+
+    // Function to submit a vote for a specific election
+    function vote(uint256 electionId) external {
+        require(votes[electionId] > 0, "Election does not exist");
+        votes[electionId]++;
+    }
+
+    // Function to retrieve the result of a specific election
+    function getResult(uint256 electionId) external view returns (uint256) {
+        require(votes[electionId] > 0, "Election does not exist");
+        return votes[electionId] - 1; // Subtract the initial vote
+    }
+}
+'''
 
 **Step 3: Deploying the Smart Contract:**
 
 Use Celo's development network for testing purposes. Deploy the smart contract using the following script:
-<script src="https://gist.github.com/Gillmasija/8e5e1a4d2164355f81de115741648f29.js"></script>
+'''//javascript
+// deploy.js
+const contract = require('./Voting.json'); // Make sure to compile your smart contract first
+const kit = require('@celo/contractkit');
+
+// Function to deploy the smart contract
+async function deployContract() {
+    // Initialize Celo ContractKit
+    const kitInstance = await kit.newKit('https://alfajores-forno.celo-testnet.org');
+    kitInstance.addAccount(process.env.PRIVATE_KEY);
+
+    // Get the deployer's account
+    const accounts = await kitInstance.web3.eth.getAccounts();
+    const deployer = accounts[0];
+
+    // Create a new instance of the smart contract
+    const instance = new kitInstance.web3.eth.Contract(contract.abi);
+    const deploy = instance.deploy({ data: contract.bytecode });
+
+    // Deploy the contract to the Celo blockchain
+    const newContract = await deploy.send({
+        from: deployer,
+        gas: 5000000,
+    });
+
+    console.log('Contract deployed at:', newContract.options.address);
+}
+
+deployContract();
+
 Run the deployment script using:
-<script src="https://gist.github.com/Gillmasija/308312b54cabde2e745a9a3f39792368.js"></script>
+'''//bash
+Contract deployed at: 0x1234567890123456789012345678901234567890
+'''
 
 **Step 4: Building the Frontend - Developing a Simple Web Interface:**
 
 Now that we have our smart contract deployed on the Celo blockchain, let's create a user-friendly web interface to interact with it. For simplicity, we'll use HTML, CSS, and JavaScript. You can enhance the frontend further based on your project requirements.
 1. **Create HTML file (index.html):**
-   <script src="https://gist.github.com/Gillmasija/0b1587c4152d5afa699cc10c7515b487.js"></script>
+   <script src="https://gist.github.com/Gillmasija/0b1587c4152d5afa699cc10c7515b487.js"></scrip>
 2. **Create JavaScript file (app.js):**
    <script src="https://gist.github.com/Gillmasija/7e305210a1e8816dbd3c48d12508015f.js"></script>
 3. **Link to a Tutorial on Creating a Web Interface for a Smart Contract:**
