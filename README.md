@@ -1,5 +1,4 @@
-**Title: Building a Decentralized Voting Application with Celo Blockchain
-**
+**Title: Building a Decentralized Voting Application with Celo Blockchain**
 **Purpose:**
 This tutorial aims to guide developers in creating a decentralized voting application using the Celo blockchain. By the end of this tutorial, you'll have a solid understanding of Celo's blockchain technology and be able to build a simple but functional decentralized voting system. This project showcases the power of blockchain in ensuring transparency and security in voting processes.
 **Introduction:**
@@ -13,11 +12,10 @@ Celo's blockchain technology is particularly well-suited for our decentralized v
 
 By leveraging Celo for our decentralized voting application, we tap into a blockchain platform that aligns with the principles of transparency, security, and accessibility. As we proceed with this tutorial, we'll explore how to harness the capabilities of Celo to build a robust and user-friendly decentralized voting system.
 
-**Prerequisites:
-**
-Basic understanding of blockchain concepts
-Familiarity with JavaScript and Node.js
-Celo Development Kit (Celo SDK) installed
+**Prerequisites:**
+- Basic understanding of blockchain concepts. If you are new to blockchain, consider exploring resources such as [Blockchain Basics](https://www.ibm.com/cloud/learn/blockchain-basics) to gain a foundational understanding.
+- Familiarity with JavaScript and Node.js. If you need a refresher or are new to these technologies, check out Mozilla Developer Network's [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) and the [Node.js Getting Started Guide](https://nodejs.org/en/docs/guides/getting-started-guide/).
+- Celo Development Kit (Celo SDK) installed. Follow the tutorial on [Installing Celo Development Kit](https://docs.celo.org/developer-guide/start) to set up the necessary tools for Celo blockchain development.
 
 **Step 1: Setting Up the Project:**
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
