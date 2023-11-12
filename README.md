@@ -1,15 +1,19 @@
 **Title: Building a Decentralized Voting Application with Celo Blockchain**
 
 **Purpose:**
+
 This tutorial aims to guide developers in creating a decentralized voting application using the Celo blockchain. By the end of this tutorial, you'll have a solid understanding of Celo's blockchain technology and be able to build a simple but functional decentralized voting system. This project showcases the power of blockchain in ensuring transparency and security in voting processes.
 
 **Introduction:**
+
 Blockchain technology, at its core, is a decentralized and distributed ledger system that enables secure and transparent record-keeping. One blockchain platform that stands out for its emphasis on usability, stability, and the goal of financial inclusion is Celo.
 
 **Celo Blockchain Technology:**
+
 Celo is an open-source blockchain platform that aims to make financial tools accessible to anyone with a mobile phone. Built on the Ethereum framework, Celo extends its capabilities by introducing features like a stablecoin pegged to the US Dollar, allowing for a more user-friendly and stable environment. The platform prioritizes ease of use, making it an ideal choice for projects seeking to integrate blockchain technology seamlessly.
 
 **Applicability to the Topic:**
+
 Celo's blockchain technology is particularly well-suited for our decentralized voting application. Its focus on usability ensures that individuals with basic technical knowledge can easily participate in the voting process, promoting inclusivity. Additionally, Celo's stability features, such as its stablecoin, contribute to a more reliable ecosystem, crucial for applications where accuracy and trust are paramount, as in the case of voting systems.
 
 By leveraging Celo for our decentralized voting application, we tap into a blockchain platform that aligns with the principles of transparency, security, and accessibility. As we proceed with this tutorial, we'll explore how to harness the capabilities of Celo to build a robust and user-friendly decentralized voting system.
@@ -20,21 +24,24 @@ By leveraging Celo for our decentralized voting application, we tap into a block
 - Celo Development Kit (Celo SDK) installed. Follow the tutorial on [Installing Celo Development Kit](https://docs.celo.org/developer-guide/start) to set up the necessary tools for Celo blockchain development.
 
 **Step 1: Setting Up the Project:**
+
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
 <script src="https://gist.github.com/Gillmasija/f776e6d0d8fe980945e0232347e44472.js"></script>
 
 **Step 2: Smart Contract Development:**
+
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
 <script src="https://gist.github.com/Gillmasija/542ebe82acee8d28e1a60d6a066be85a.js"></script>
 
 **Step 3: Deploying the Smart Contract:**
+
 Use Celo's development network for testing purposes. Deploy the smart contract using the following script:
 <script src="https://gist.github.com/Gillmasija/8e5e1a4d2164355f81de115741648f29.js"></script>
 Run the deployment script using:
 <script src="https://gist.github.com/Gillmasija/308312b54cabde2e745a9a3f39792368.js"></script>
 
-**Step 4: Building the Frontend - Developing a Simple Web Interface:
-**
+**Step 4: Building the Frontend - Developing a Simple Web Interface:**
+
 Now that we have our smart contract deployed on the Celo blockchain, let's create a user-friendly web interface to interact with it. For simplicity, we'll use HTML, CSS, and JavaScript. You can enhance the frontend further based on your project requirements.
 1. **Create HTML file (index.html):**
    <script src="https://gist.github.com/Gillmasija/0b1587c4152d5afa699cc10c7515b487.js"></script>
@@ -81,9 +88,13 @@ By completing this step, you demonstrate the full cycle of a decentralized votin
 Remember to replace placeholder values in your code, such as the contract address, with actual values before testing your application.
 
 **Conclusion:**
+
 Congratulations! You've successfully built a decentralized voting application on the Celo blockchain. This project demonstrates the potential of blockchain in ensuring trust and transparency in voting systems. Feel free to expand on this project by adding features such as user authentication, real-time result updates, and more.
 
 **Demo and Code Repository:**
+
 Demo Link: 
+
 Code Repository:
+
 This tutorial provides a foundational understanding of developing decentralized applications on the Celo blockchain.
