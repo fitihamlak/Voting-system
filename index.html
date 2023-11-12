@@ -1,0 +1,24 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Voting App</title>
+</head>
+<body>
+    <h1>Decentralized Voting App</h1>
+
+    <button onclick="startElection()">Start New Election</button>
+
+    <label for="electionId">Election ID:</label>
+    <input type="number" id="electionId" placeholder="Enter Election ID">
+    <button onclick="vote()">Vote</button>
+
+    <button onclick="getResult()">Get Result</button>
+
+    <div id="result"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

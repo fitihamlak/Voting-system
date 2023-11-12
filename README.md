@@ -26,6 +26,7 @@ By leveraging Celo for our decentralized voting application, we tap into a block
 **Step 1: Setting Up the Project:**
 
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
+
 '''//bash
 mkdir decentralized-voting
 cd decentralized-voting
@@ -36,43 +37,44 @@ npm install celo-sdk
 **Step 2: Smart Contract Development:**
 
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
+
 '''//javascript
+
 // Voting.sol
-pragma solidity ^0.8.0;
+     pragma solidity ^0.8.0;
+        contract Voting {
+     address public admin;
+        mapping(uint256 => uint256) public votes;
 
-contract Voting {
-    address public admin;
-    mapping(uint256 => uint256) public votes;
-
-    // Modifier to restrict access to the admin
-    modifier onlyAdmin() {
+     // Modifier to restrict access to the admin
+        modifier onlyAdmin() {
         require(msg.sender == admin, "Only admin can call this function");
         _;
-    }
+     }
 
-    // Constructor to set the admin when the contract is deployed
-    constructor() {
+        // Constructor to set the admin when the contract is deployed
+     constructor() {
         admin = msg.sender;
-    }
+     }
 
-    // Function to start a new election, only callable by the admin
-    function startElection(uint256 electionId) external onlyAdmin {
+        // Function to start a new election, only callable by the admin
+     function startElection(uint256 electionId) external onlyAdmin {
         require(votes[electionId] == 0, "Election ID already exists");
         votes[electionId] = 1; // Initialize with one vote to avoid division by zero later
-    }
+     }
 
-    // Function to submit a vote for a specific election
-    function vote(uint256 electionId) external {
+     // Function to submit a vote for a specific election
+        function vote(uint256 electionId) external {
         require(votes[electionId] > 0, "Election does not exist");
         votes[electionId]++;
-    }
+        }
 
-    // Function to retrieve the result of a specific election
-    function getResult(uint256 electionId) external view returns (uint256) {
+     // Function to retrieve the result of a specific election
+     function getResult(uint256 electionId) external view returns (uint256) {
         require(votes[electionId] > 0, "Election does not exist");
         return votes[electionId] - 1; // Subtract the initial vote
+        }
     }
-}
 '''
 
 **Step 3: Deploying the Smart Contract:**
@@ -117,9 +119,77 @@ Contract deployed at: 0x1234567890123456789012345678901234567890
 
 Now that we have our smart contract deployed on the Celo blockchain, let's create a user-friendly web interface to interact with it. For simplicity, we'll use HTML, CSS, and JavaScript. You can enhance the frontend further based on your project requirements.
 1. **Create HTML file (index.html):**
-   <script src="https://gist.github.com/Gillmasija/0b1587c4152d5afa699cc10c7515b487.js"></scrip>
+   '''//html
+   <!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Voting App</title>
+</head>
+<body>
+    <h1>Decentralized Voting App</h1>
+
+    <button onclick="startElection()">Start New Election</button>
+
+    <label for="electionId">Election ID:</label>
+    <input type="number" id="electionId" placeholder="Enter Election ID">
+    <button onclick="vote()">Vote</button>
+
+    <button onclick="getResult()">Get Result</button>
+
+    <div id="result"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+'''
 2. **Create JavaScript file (app.js):**
-   <script src="https://gist.github.com/Gillmasija/7e305210a1e8816dbd3c48d12508015f.js"></script>
+   '''//javascript
+   // app.js
+const kit = require('@celo/contractkit');
+const contract = require('./Voting.json'); // Adjust path accordingly
+
+// Set up ContractKit
+const kitInstance = kit.newKit('https://alfajores-forno.celo-testnet.org');
+kitInstance.addAccount(process.env.PRIVATE_KEY);
+
+// Get the deployed contract instance
+const contractInstance = new kitInstance.web3.eth.Contract(contract.abi, '0x1234567890123456789012345678901234567890'); // Replace with your contract address
+
+// Function to start a new election
+async function startElection() {
+    try {
+        const transaction = await contractInstance.methods.startElection(1).send();
+        console.log('Transaction Hash:', transaction.transactionHash);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Function to submit a vote
+async function vote() {
+    const electionId = document.getElementById('electionId').value;
+    try {
+        const transaction = await contractInstance.methods.vote(electionId).send();
+        console.log('Transaction Hash:', transaction.transactionHash);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Function to get the result of an election
+async function getResult() {
+    const electionId = document.getElementById('electionId').value;
+    try {
+        const result = await contractInstance.methods.getResult(electionId).call();
+        document.getElementById('result').innerText = `Result: ${result}`;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+'''
 3. **Link to a Tutorial on Creating a Web Interface for a Smart Contract:**
 
 To learn more about creating a web interface for a smart contract, you can follow the tutorial here. This tutorial provides step-by-step guidance on building a simple decentralized application frontend using web technologies and Web3.js.
