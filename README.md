@@ -1,6 +1,8 @@
 **Title: Building a Decentralized Voting Application with Celo Blockchain**
+
 **Purpose:**
 This tutorial aims to guide developers in creating a decentralized voting application using the Celo blockchain. By the end of this tutorial, you'll have a solid understanding of Celo's blockchain technology and be able to build a simple but functional decentralized voting system. This project showcases the power of blockchain in ensuring transparency and security in voting processes.
+
 **Introduction:**
 Blockchain technology, at its core, is a decentralized and distributed ledger system that enables secure and transparent record-keeping. One blockchain platform that stands out for its emphasis on usability, stability, and the goal of financial inclusion is Celo.
 
