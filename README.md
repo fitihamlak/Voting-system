@@ -103,7 +103,7 @@ deployContract();
 ```
 **Getting Started:**
 
-Before deploying the smart contract, make sure you have a Celo account and its private key. If you're new to Celo or need assistance, check out this [tutorial on creating a Celo account and obtaining the private key](https://https://docs.celo.org/wallet). Ensure you keep your private key secure and never share it publicly.
+Before deploying the smart contract, make sure you have a Celo account and its private key. If you're new to Celo or need assistance, check out this [tutorial on creating a Celo account and obtaining the private key](https://coin98.net/what-is-celo-wallet). Ensure you keep your private key secure and never share it publicly.
 
 Run the deployment script using:
 ```bash
