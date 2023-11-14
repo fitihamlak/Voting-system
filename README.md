@@ -107,6 +107,24 @@ Run the deployment script using:
 export PRIVATE_KEY=your_private_key
 node deploy.js
 ```
+The provided code is a set of commands that you can run in a Bash shell to deploy the smart contract using the `deploy.js` script. Here's an explanation of each part:
+
+1. `export PRIVATE_KEY=your_private_key`: This command exports a private key as an environment variable named `PRIVATE_KEY`. You need to replace `your_private_key` with the actual private key associated with the Celo account that will be used to deploy the smart contract.
+
+2. `node deploy.js`: This command runs the `deploy.js` script using Node.js. The script is responsible for deploying the smart contract to the Celo blockchain.
+
+**Where to Get Your Private Key:**
+
+Your private key is a sensitive piece of information that grants access to your Celo account. You typically obtain it when creating or importing a wallet. If you're using a Celo development environment, you might have generated a private key during the setup process.
+
+For a local development environment, you can generate a private key using tools like `celocli`. Here's a general example:
+
+```bash
+celocli account:new
+```
+
+Follow the prompts to create a new account, and the private key will be generated for you. Remember to handle private keys securely and never share them publicly.
+
 
 After running the provided code, you can expect to see the contract address logged to the console. Here's an example result you might see after running deploy.js:
 ```bash
