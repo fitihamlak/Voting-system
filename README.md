@@ -21,16 +21,16 @@ By leveraging Celo for our decentralized voting application, we tap into a block
 
 #Step 1: Setting Up the Project:
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
-'''bash
+```bash
 mkdir decentralized-voting
 cd decentralized-voting
 npm init -y
 npm install celo-sdk
-'''
+```
 
 #Step 2: Smart Contract Development:
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
-'''Javascript
+```Javascript
 // Voting.sol
 pragma solidity ^0.8.0;
 
@@ -67,11 +67,11 @@ contract Voting {
         return votes[electionId] - 1; // Subtract the initial vote
     }
 }
-'''
+```
 
 #Step 3: Deploying the Smart Contract:
 Use Celo's development network for testing purposes. Deploy the smart contract using the following script:
-'''Javascript
+```Javascript
 // deploy.js
 const contract = require('./Voting.json'); // Make sure to compile your smart contract first
 const kit = require('@celo/contractkit');
@@ -100,25 +100,25 @@ async function deployContract() {
 }
 
 deployContract();
-'''
+```
 
 Run the deployment script using:
-'''bash
+```bash
 export PRIVATE_KEY=your_private_key
 node deploy.js
-'''
+```
 
 After running the provided code, you can expect to see the contract address logged to the console. Here's an example result you might see after running deploy.js:
-'''bash
+```bash
 Contract deployed at: 0x1234567890123456789012345678901234567890
-'''
+```
 The actual address will be different, but it will be similar in structure. This address is where your smart contract is deployed on the Celo blockchain. You can use this address to interact with your smart contract from your frontend application.
 
 #Step 4: Building the Frontend - Developing a Simple Web Interface:
 
 Now that we have our smart contract deployed on the Celo blockchain, let's create a user-friendly web interface to interact with it. For simplicity, we'll use HTML, CSS, and JavaScript. You can enhance the frontend further based on your project requirements.
 ##Create HTML file (index.html):
-'''html
+```html
     <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -143,9 +143,9 @@ Now that we have our smart contract deployed on the Celo blockchain, let's creat
     <script src="app.js"></script>
 </body>
 </html>
-'''
+```
 ##Create JavaScript file (app.js):
-'''javascript
+```javascript
 // app.js
 const kit = require('@celo/contractkit');
 const contract = require('./Voting.json'); // Adjust path accordingly
@@ -188,7 +188,7 @@ async function getResult() {
         console.error('Error:', error);
     }
 }
-'''
+```
 ##Link to a Tutorial on Creating a Web Interface for a Smart Contract:
 
 To learn more about creating a web interface for a smart contract, you can follow the tutorial here. This tutorial provides step-by-step guidance on building a simple decentralized application frontend using web technologies and Web3.js.
