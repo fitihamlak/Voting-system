@@ -101,6 +101,9 @@ async function deployContract() {
 
 deployContract();
 ```
+**Getting Started:**
+
+Before deploying the smart contract, make sure you have a Celo account and its private key. If you're new to Celo or need assistance, check out this [tutorial on creating a Celo account and obtaining the private key](https://docs.celo.org/celo-owner-guide/overview). Ensure you keep your private key secure and never share it publicly.
 
 Run the deployment script using:
 ```bash
