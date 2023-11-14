@@ -1,86 +1,77 @@
-**Title: Building a Decentralized Voting Application with Celo Blockchain**
+#Building a Decentralized Voting Application with Celo Blockchain
 
-**Purpose:**
-
+##Purpose:
 This tutorial aims to guide developers in creating a decentralized voting application using the Celo blockchain. By the end of this tutorial, you'll have a solid understanding of Celo's blockchain technology and be able to build a simple but functional decentralized voting system. This project showcases the power of blockchain in ensuring transparency and security in voting processes.
 
-**Introduction:**
-
+##**Introduction:**
 Blockchain technology, at its core, is a decentralized and distributed ledger system that enables secure and transparent record-keeping. One blockchain platform that stands out for its emphasis on usability, stability, and the goal of financial inclusion is Celo.
 
-**Celo Blockchain Technology:**
-
+###**Celo Blockchain Technology:**
 Celo is an open-source blockchain platform that aims to make financial tools accessible to anyone with a mobile phone. Built on the Ethereum framework, Celo extends its capabilities by introducing features like a stablecoin pegged to the US Dollar, allowing for a more user-friendly and stable environment. The platform prioritizes ease of use, making it an ideal choice for projects seeking to integrate blockchain technology seamlessly.
 
-**Applicability to the Topic:**
-
+###**Applicability to the Topic:**
 Celo's blockchain technology is particularly well-suited for our decentralized voting application. Its focus on usability ensures that individuals with basic technical knowledge can easily participate in the voting process, promoting inclusivity. Additionally, Celo's stability features, such as its stablecoin, contribute to a more reliable ecosystem, crucial for applications where accuracy and trust are paramount, as in the case of voting systems.
 
 By leveraging Celo for our decentralized voting application, we tap into a blockchain platform that aligns with the principles of transparency, security, and accessibility. As we proceed with this tutorial, we'll explore how to harness the capabilities of Celo to build a robust and user-friendly decentralized voting system.
 
-**Prerequisites:**
+##**Prerequisites:**
 - Basic understanding of blockchain concepts. If you are new to blockchain, consider exploring resources such as [Blockchain Basics](https://www.ibm.com/cloud/learn/blockchain-basics) to gain a foundational understanding.
 - Familiarity with JavaScript and Node.js. If you need a refresher or are new to these technologies, check out Mozilla Developer Network's [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) and the [Node.js Getting Started Guide](https://nodejs.org/en/docs/guides/getting-started-guide/).
 - Celo Development Kit (Celo SDK) installed. Follow the tutorial on [Installing Celo Development Kit](https://docs.celo.org/developer-guide/start) to set up the necessary tools for Celo blockchain development.
 
-**Step 1: Setting Up the Project:**
-
+#Step 1: Setting Up the Project:
 Begin by creating a new Node.js project and installing the necessary dependencies. Use the following commands in your terminal:
-
-'''//bash
+'''bash
 mkdir decentralized-voting
 cd decentralized-voting
 npm init -y
 npm install celo-sdk
 '''
 
-**Step 2: Smart Contract Development:**
-
+#Step 2: Smart Contract Development:
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
-
-'''//javascript
-
+'''Javascript
 // Voting.sol
-     pragma solidity ^0.8.0;
-        contract Voting {
-     address public admin;
-        mapping(uint256 => uint256) public votes;
+pragma solidity ^0.8.0;
 
-     // Modifier to restrict access to the admin
-        modifier onlyAdmin() {
+contract Voting {
+    address public admin;
+    mapping(uint256 => uint256) public votes;
+
+    // Modifier to restrict access to the admin
+    modifier onlyAdmin() {
         require(msg.sender == admin, "Only admin can call this function");
         _;
-     }
+    }
 
-        // Constructor to set the admin when the contract is deployed
-     constructor() {
+    // Constructor to set the admin when the contract is deployed
+    constructor() {
         admin = msg.sender;
-     }
+    }
 
-        // Function to start a new election, only callable by the admin
-     function startElection(uint256 electionId) external onlyAdmin {
+    // Function to start a new election, only callable by the admin
+    function startElection(uint256 electionId) external onlyAdmin {
         require(votes[electionId] == 0, "Election ID already exists");
         votes[electionId] = 1; // Initialize with one vote to avoid division by zero later
-     }
+    }
 
-     // Function to submit a vote for a specific election
-        function vote(uint256 electionId) external {
+    // Function to submit a vote for a specific election
+    function vote(uint256 electionId) external {
         require(votes[electionId] > 0, "Election does not exist");
         votes[electionId]++;
-        }
+    }
 
-     // Function to retrieve the result of a specific election
-     function getResult(uint256 electionId) external view returns (uint256) {
+    // Function to retrieve the result of a specific election
+    function getResult(uint256 electionId) external view returns (uint256) {
         require(votes[electionId] > 0, "Election does not exist");
         return votes[electionId] - 1; // Subtract the initial vote
-        }
     }
+}
 '''
 
-**Step 3: Deploying the Smart Contract:**
-
+#Step 3: Deploying the Smart Contract:
 Use Celo's development network for testing purposes. Deploy the smart contract using the following script:
-'''//javascript
+'''Javascript
 // deploy.js
 const contract = require('./Voting.json'); // Make sure to compile your smart contract first
 const kit = require('@celo/contractkit');
@@ -109,18 +100,26 @@ async function deployContract() {
 }
 
 deployContract();
-
-Run the deployment script using:
-'''//bash
-Contract deployed at: 0x1234567890123456789012345678901234567890
 '''
 
-**Step 4: Building the Frontend - Developing a Simple Web Interface:**
+Run the deployment script using:
+'''bash
+export PRIVATE_KEY=your_private_key
+node deploy.js
+'''
+
+After running the provided code, you can expect to see the contract address logged to the console. Here's an example result you might see after running deploy.js:
+'''bash
+Contract deployed at: 0x1234567890123456789012345678901234567890
+'''
+The actual address will be different, but it will be similar in structure. This address is where your smart contract is deployed on the Celo blockchain. You can use this address to interact with your smart contract from your frontend application.
+
+#Step 4: Building the Frontend - Developing a Simple Web Interface:
 
 Now that we have our smart contract deployed on the Celo blockchain, let's create a user-friendly web interface to interact with it. For simplicity, we'll use HTML, CSS, and JavaScript. You can enhance the frontend further based on your project requirements.
-1. **Create HTML file (index.html):**
-   '''//html
-   <!-- index.html -->
+##Create HTML file (index.html):
+'''html
+    <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,9 +144,9 @@ Now that we have our smart contract deployed on the Celo blockchain, let's creat
 </body>
 </html>
 '''
-2. **Create JavaScript file (app.js):**
-   '''//javascript
-   // app.js
+##Create JavaScript file (app.js):
+'''javascript
+// app.js
 const kit = require('@celo/contractkit');
 const contract = require('./Voting.json'); // Adjust path accordingly
 
@@ -190,7 +189,7 @@ async function getResult() {
     }
 }
 '''
-3. **Link to a Tutorial on Creating a Web Interface for a Smart Contract:**
+##Link to a Tutorial on Creating a Web Interface for a Smart Contract:
 
 To learn more about creating a web interface for a smart contract, you can follow the tutorial here. This tutorial provides step-by-step guidance on building a simple decentralized application frontend using web technologies and Web3.js.
 
@@ -198,7 +197,7 @@ By integrating this frontend with your Celo smart contract, users can easily int
 
 Remember to replace placeholder values such as the contract address and private key with your actual values before testing your application.
 
-**Step 5: Testing the Application - Hosting and Connecting the Frontend:**
+#**Step 5: Testing the Application - Hosting and Connecting the Frontend:**
 
 Now that we've built the frontend, it's time to host it on a web server and connect it to the deployed smart contract on the Celo blockchain. This step is crucial to allow users to interact with the voting system through a user-friendly interface.
 
@@ -230,14 +229,10 @@ By completing this step, you demonstrate the full cycle of a decentralized votin
 
 Remember to replace placeholder values in your code, such as the contract address, with actual values before testing your application.
 
-**Conclusion:**
-
+#Conclusion:
 Congratulations! You've successfully built a decentralized voting application on the Celo blockchain. This project demonstrates the potential of blockchain in ensuring trust and transparency in voting systems. Feel free to expand on this project by adding features such as user authentication, real-time result updates, and more.
 
-**Demo and Code Repository:**
+#Code Repository:
+Check out the code in the [Voting-system](https://github.com/Gillmasija/voting-system).
 
-Demo Link: 
 
-Code Repository:
-
-This tutorial provides a foundational understanding of developing decentralized applications on the Celo blockchain.
