@@ -116,17 +116,26 @@ The provided code is a set of commands that you can run in a Bash shell to deplo
 
 2. `node deploy.js`: This command runs the `deploy.js` script using Node.js. The script is responsible for deploying the smart contract to the Celo blockchain.
 
-**Where to Get Your Private Key:**
+### Troubleshooting: "Cannot find module" Error
 
-Your private key is a sensitive piece of information that grants access to your Celo account. You typically obtain it when creating or importing a wallet. If you're using a Celo development environment, you might have generated a private key during the setup process.
+If you encounter an error similar to the one below:
 
-For a local development environment, you can generate a private key using tools like `celocli`. Here's a general example:
+![Cannot find module error](![Alt text](image.png))
 
-```bash
-celocli account:new
-```
+**Solution:**
 
-Follow the prompts to create a new account, and the private key will be generated for you. Remember to handle private keys securely and never share them publicly.
+This error typically occurs when the specified module or file is not found. Follow these steps to resolve it:
+
+1. **Check File Paths:**
+   - Verify that the file specified in the error message (`./Voting.json` in this case) exists in the correct location.
+
+2. **Correct File Paths in Code:**
+   - Double-check your code, specifically the paths where you are requiring or importing modules. Ensure that they match the actual file paths.
+
+3. **Ensure File Existence:**
+   - Confirm that the file `Voting.json` is present in the expected directory.
+
+If the issue persists, consider [checking our tutorial on resolving common Node.js module errors](https://www.freecodecamp.org/news/error-cannot-find-module-node-npm-error-solved/) for further guidance.
 
 
 After running the provided code, you can expect to see the contract address logged to the console. Here's an example result you might see after running deploy.js:
