@@ -56,43 +56,64 @@ npm install celo-sdk
 
 # Step 2: Smart Contract Development:
 Create a simple smart contract for the voting system. The contract should include functions for creating a new election, submitting votes, and retrieving results. Here's a basic example:
-```Javascript
-// Voting.sol
-pragma solidity ^0.8.0;
+```Solidity
+pragma solidity ^0.5.16;
 
 contract Voting {
-    address public admin;
-    mapping(uint256 => uint256) public votes;
-
-    // Modifier to restrict access to the admin
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin can call this function");
-        _;
+    // Struct to represent a candidate
+    struct Candidate {
+        uint256 id;
+        string name;
+        uint256 voteCount;
     }
 
-    // Constructor to set the admin when the contract is deployed
-    constructor() {
-        admin = msg.sender;
+    // Array to store candidate information
+    Candidate[] public candidates;
+
+    // Mapping to track voter addresses and their vote status
+    mapping(address => bool) public hasVoted;
+
+    // Event to be emitted when a new election is initiated
+    event ElectionInitiated();
+
+    // Event to be emitted when a vote is cast
+    event VoteCast(address indexed voter, uint256 candidateId);
+
+    /**
+     * @dev Initiates a new election.
+     * Emits ElectionInitiated event.
+     * Developers should customize the logic inside this function
+     * based on their election initiation requirements.
+     */
+    function initiateElection() public {
+        // TODO: Add logic to initiate a new election
+        emit ElectionInitiated();
     }
 
-    // Function to start a new election, only callable by the admin
-    function startElection(uint256 electionId) external onlyAdmin {
-        require(votes[electionId] == 0, "Election ID already exists");
-        votes[electionId] = 1; // Initialize with one vote to avoid division by zero later
-    }
+    /**
+     * @dev Allows voters to cast their votes for a candidate.
+     * @param _candidateId The ID of the candidate to vote for.
+     * Developers should ensure proper validation and security measures
+     * to prevent unauthorized voting.
+     */
+    function castVote(uint256 _candidateId) public {
+        // Ensure the candidate ID is within valid range
+        require(_candidateId < candidates.length, "Invalid candidate ID");
+        
+        // Ensure the voter has not already cast a vote
+        require(!hasVoted[msg.sender], "You have already voted");
 
-    // Function to submit a vote for a specific election
-    function vote(uint256 electionId) external {
-        require(votes[electionId] > 0, "Election does not exist");
-        votes[electionId]++;
-    }
+        // Update candidate vote count
+        candidates[_candidateId].voteCount++;
 
-    // Function to retrieve the result of a specific election
-    function getResult(uint256 electionId) external view returns (uint256) {
-        require(votes[electionId] > 0, "Election does not exist");
-        return votes[electionId] - 1; // Subtract the initial vote
+        // Mark voter as having voted
+        hasVoted[msg.sender] = true;
+
+        // Emit the VoteCast event
+        emit VoteCast(msg.sender, _candidateId);
     }
 }
+
 ```
 ## Security Considerations
 
@@ -292,6 +313,32 @@ async function getResult() {
     } catch (error) {
         console.error('Error:', error);
     }
+
+    // Assume there is a function to cast a vote
+function castVote(candidateId) {
+    // Your logic to cast a vote...
+
+    // Display success message to the user
+    console.log("Vote cast successfully!");
+}
+
+// Example of improved error handling
+try {
+    // Attempt to initiate a new election
+    initiateElection();
+} catch (error) {
+    // Handle errors by displaying meaningful messages to the user
+    console.error("Failed to initiate election:", error.message);
+}
+
+try {
+    // Attempt to cast a vote
+    castVote(1); // Pass the candidate ID as an example
+} catch (error) {
+    // Handle errors by displaying meaningful messages to the user
+    console.error("Failed to cast vote:", error.message);
+}
+
 }
 ```
 ## Link to a Tutorial on Creating a Web Interface for a Smart Contract:
