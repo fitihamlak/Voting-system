@@ -103,7 +103,28 @@ deployContract();
 ```
 **Getting Started:**
 
-Before deploying the smart contract, make sure you have a Celo account and its private key. If you're new to Celo or need assistance, check out this [tutorial on creating a Celo account and obtaining the private key](https://coin98.net/what-is-celo-wallet). Ensure you keep your private key secure and never share it publicly.
+Before deploying the smart contract, make sure you have a Celo account and its private key. If you're new to Celo or need assistance, follow these steps to create a Celo account and ensure the security of your private key:
+
+1. **Create a Celo Account:**
+   - Visit the [Celo Wallet](https://celowallet.app/) to create a new Celo account. Follow the on-screen instructions to set up your wallet.
+
+2. **Secure Your Private Key:**
+   - Your private key is a sensitive piece of information. Ensure you securely store and backup your private key. Consider using hardware wallets or secure key management practices.
+
+3. **Tutorial: Creating a Celo Account and Securing Private Key:**
+   - For a detailed walkthrough, check out the [tutorial on creating a Celo account and securing your private key](https://docs.celo.org/celo-owner-guide/overview). This tutorial provides step-by-step guidance for a secure setup.
+
+4. **Provide Private Key for Deployment:**
+   - Once you have your Celo account and private key, export the private key and use it during the deployment process. For example:
+      ```bash
+      export PRIVATE_KEY=your_private_key
+      node deploy.js
+      ```
+
+Ensure you keep your private key secure and never share it publicly.
+
+For further assistance or troubleshooting, refer to the [Celo documentation](https://docs.celo.org/).
+
 
 Run the deployment script using:
 ```bash
