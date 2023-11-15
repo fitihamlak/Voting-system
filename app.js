@@ -40,3 +40,35 @@ async function getResult() {
         console.error('Error:', error);
     }
 }
+// Assume there is a function to initiate a new election
+function initiateElection() {
+    // Your logic to initiate an election...
+
+    // Display success message to the user
+    console.log("Election initiated successfully!");
+}
+
+// Assume there is a function to cast a vote
+function castVote(candidateId) {
+    // Your logic to cast a vote...
+
+    // Display success message to the user
+    console.log("Vote cast successfully!");
+}
+
+// Example of improved error handling
+try {
+    // Attempt to initiate a new election
+    initiateElection();
+} catch (error) {
+    // Handle errors by displaying meaningful messages to the user
+    console.error("Failed to initiate election:", error.message);
+}
+
+try {
+    // Attempt to cast a vote
+    castVote(1); // Pass the candidate ID as an example
+} catch (error) {
+    // Handle errors by displaying meaningful messages to the user
+    console.error("Failed to cast vote:", error.message);
+}
